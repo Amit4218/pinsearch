@@ -3,8 +3,8 @@ from datetime import datetime
 
 import requests
 from utils import read_csv_data, write_data_to_json
+from cron.datafile_scraper import DataFileScraper
 from logger import logger
-
 
 
 
@@ -12,11 +12,13 @@ def pincode_update_job():
     try:
         logger.info("[BACKGROUND_JOB] Pincode update task started at %s",datetime.now())
 
-        # add a function to download the file
+        csv_file = DataFileScraper(logger=logger).start()
         
-        csv_data = read_csv_data(file_name="datafile.csv", logger=logger)
+        if csv_file:
         
-        write_data_to_json(csv_data=csv_data, logger=logger)
+            csv_data = read_csv_data(file_name=csv_file, logger=logger)
+        
+            write_data_to_json(csv_data=csv_data, logger=logger)
 
         logger.info("[BACKGROUND_JOB] job completed successfully at %s", datetime.now())
 
