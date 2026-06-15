@@ -1,5 +1,6 @@
 import csv
 import json
+import os
 from pathlib import Path
 from logging import Logger
 
@@ -7,7 +8,7 @@ from logging import Logger
 from schema.csv_data import CsvData
 
 # filename of where the csv data is stored in json
-PINCODE_FILE_NAME = Path("pincode_data.json")
+PINCODE_FILE_NAME = Path("temp/pincode_data.json")
 
 def read_csv_data(file_name: str, logger: Logger):
     
@@ -50,6 +51,9 @@ def write_data_to_json(csv_data, logger: Logger) -> None:
     
     logger.info("[BACKGROUND_JOB] Writing data to %s",PINCODE_FILE_NAME)
     try:
+        
+        if not os.path.exists(PINCODE_FILE_NAME):
+            os.makedirs("temp")
         
         with open(PINCODE_FILE_NAME, "w") as json_file:
             json.dump(csv_data, json_file, indent=4)
