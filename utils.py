@@ -60,18 +60,3 @@ def write_data_to_json(csv_data, logger: Logger) -> None:
     
     except Exception as e:
         raise Exception("Error writing csv data to json file", e)
-        
-        
-def read_json_file(pincode:str) -> CsvData | None:
-    
-    try:
-        with open(PINCODE_FILE_NAME) as f:
-            
-            data = json.load(f)
-            
-            if data[pincode]:
-                return data[pincode]
-            
-    except Exception:
-        return None
-
