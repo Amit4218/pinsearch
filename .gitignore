@@ -14,3 +14,4 @@ pincode_data.json
 datafile.csv
 temp/
 test.py
+.env
