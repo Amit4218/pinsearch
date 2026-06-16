@@ -41,6 +41,7 @@ def read_csv_data(file_name: str, logger: Logger):
                 )
         
         logger.info("[BACKGROUND_JOB] Completed reading and converting csv data")
+        os.remove(file_name)
         return data
     
     except Exception as e:
@@ -51,9 +52,6 @@ def write_data_to_json(csv_data, logger: Logger) -> None:
     
     logger.info("[BACKGROUND_JOB] Writing data to %s",PINCODE_FILE_NAME)
     try:
-        
-        if not os.path.exists(PINCODE_FILE_NAME):
-            os.makedirs("temp")
         
         with open(PINCODE_FILE_NAME, "w") as json_file:
             json.dump(csv_data, json_file, indent=4)
