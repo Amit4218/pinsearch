@@ -87,11 +87,30 @@
         }
       }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+      if (
+        localStorage.getItem("theme") === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Configure Tailwind to support selector-based dark mode switching
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
   </head>
   <body
-    class="bg-white min-h-screen text-slate-900 font-sans flex flex-col justify-between antialiased overflow-x-hidden"
+    class="bg-white dark:bg-slate-950 min-h-screen text-slate-900 dark:text-slate-100 font-sans flex flex-col justify-between antialiased overflow-x-hidden transition-colors duration-200"
   >
     <div>
       <!-- navbar/header -->
@@ -103,72 +122,6 @@
 
     {% include 'partials/footer.html' %}
 
-    <script>
-      const form = document.getElementById("searchForm");
-      const btn = document.getElementById("searchBtn");
-      const mainContainer = document.getElementById("mainContainer");
-      const searchBlock = document.getElementById("searchBlock");
-      const resultState = document.getElementById("resultState");
-      const errorBox = document.getElementById("error");
-
-      const fields = [
-        "circlename",
-        "regionname",
-        "divisionname",
-        "officename",
-        "pincode",
-        "officetype",
-        "delivery",
-        "district",
-        "statename",
-        "latitude",
-        "longitude",
-      ];
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const pincode = document.getElementById("pincode").value.trim();
-
-        errorBox.classList.add("hidden");
-        btn.disabled = true;
-        btn.innerText = "WAIT...";
-
-        try {
-          const response = await fetch(
-            `/api/v1/pincode?q=${encodeURIComponent(pincode)}`,
-          );
-          if (!response.ok) throw new Error();
-
-          const data = await response.json();
-
-          fields.forEach((field) => {
-            const el = document.getElementById(`res-${field}`);
-            if (el) {
-              el.textContent = data[field] ?? "-";
-            }
-          });
-
-          mainContainer.classList.remove("justify-center");
-          mainContainer.classList.remove("min-h-[60vh]");
-          searchBlock.classList.add("border-b", "border-slate-100", "pb-4");
-
-          resultState.classList.remove("hidden");
-          setTimeout(() => {
-            resultState.classList.add("opacity-100");
-          }, 50);
-        } catch (err) {
-          resultState.classList.add("hidden");
-          resultState.classList.remove("opacity-100");
-          searchBlock.classList.remove("border-b", "border-slate-100", "pb-4");
-          mainContainer.classList.add("justify-center");
-          mainContainer.classList.add("min-h-[60vh]");
-
-          errorBox.classList.remove("hidden");
-        } finally {
-          btn.disabled = false;
-          btn.innerText = "SEARCH";
-        }
-      });
-    </script>
+    <script src="/static/javaScripts/base_script.js"></script>
   </body>
 </html>

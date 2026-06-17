@@ -9,18 +9,18 @@
   >
     <div class="mb-5">
       <h1
-        class="text-2xl md:text-3xl font-normal tracking-tight text-slate-900"
+        class="text-2xl md:text-3xl font-normal tracking-tight text-slate-900 dark:text-white"
       >
         Search Address information via pincode
       </h1>
-      <p class="text-slate-400 mt-1 text-xs">
+      <p class="text-slate-400 dark:text-slate-500 mt-1 text-xs">
         Enter a 6-digit postal code to view regional details.
       </p>
     </div>
 
     <form id="searchForm" class="w-full" role="search">
       <div
-        class="relative flex items-center border-b border-slate-200 focus-within:border-slate-900 transition-colors duration-200 py-1.5"
+        class="relative flex items-center border-b border-slate-200 dark:border-slate-800 focus-within:border-slate-900 dark:focus-within:border-white transition-colors duration-200 py-1.5"
       >
         <input
           id="pincode"
@@ -29,7 +29,7 @@
           pattern="[0-9]{6}"
           maxlength="6"
           placeholder="110001"
-          class="w-full bg-transparent text-xl md:text-2xl font-light tracking-widest text-slate-900 placeholder-slate-200 focus:outline-none"
+          class="w-full bg-transparent text-xl md:text-2xl font-light tracking-widest text-slate-900 dark:text-white placeholder-slate-200 dark:placeholder-slate-800 focus:outline-none"
           required
           autofocus
           aria-label="6 digit Indian Pincode"
@@ -38,7 +38,7 @@
         <button
           type="submit"
           id="searchBtn"
-          class="ml-4 px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium uppercase tracking-wider transition rounded"
+          class="ml-4 px-4 py-2 bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-100 text-white dark:text-slate-950 text-xs font-medium uppercase tracking-wider transition rounded"
         >
           Search
         </button>
@@ -48,7 +48,7 @@
 
   <div
     id="error"
-    class="hidden mt-4 p-3 bg-red-50/50 border border-red-100 rounded text-xs text-red-600 tracking-wide"
+    class="hidden mt-4 p-3 bg-red-50/50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 rounded text-xs text-red-600 dark:text-red-400 tracking-wide"
     role="alert"
   >
     Pincode not found. Please verify the numbers and try searching again.
@@ -59,14 +59,16 @@
     class="hidden opacity-0 transition-all duration-300 mt-6 md:mt-8"
     aria-label="Search Result"
   >
-    <div class="border-b border-slate-100 pb-3 mb-5 flex items-baseline gap-3">
+    <div
+      class="border-b border-slate-100 dark:border-slate-900 pb-3 mb-5 flex items-baseline gap-3"
+    >
       <span
         id="res-pincode"
-        class="text-xs font-mono font-bold tracking-widest text-slate-400"
+        class="text-xs font-mono font-bold tracking-widest text-slate-400 dark:text-slate-500"
       ></span>
       <h2
         id="res-officename"
-        class="text-base md:text-lg font-medium tracking-tight text-slate-900"
+        class="text-base md:text-lg font-medium tracking-tight text-slate-900 dark:text-white"
       ></h2>
     </div>
 
@@ -75,76 +77,98 @@
     >
       <div class="space-y-0.5">
         <h3
-          class="text-[10px] font-medium uppercase tracking-wider text-slate-400"
+          class="text-[10px] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500"
         >
           State
         </h3>
-        <p id="res-statename" class="text-xs font-normal text-slate-800"></p>
+        <p
+          id="res-statename"
+          class="text-xs font-normal text-slate-800 dark:text-slate-300"
+        ></p>
       </div>
 
       <div class="space-y-0.5">
         <h3
-          class="text-[10px] font-medium uppercase tracking-wider text-slate-400"
+          class="text-[10px] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500"
         >
           District
         </h3>
-        <p id="res-district" class="text-xs font-normal text-slate-800"></p>
+        <p
+          id="res-district"
+          class="text-xs font-normal text-slate-800 dark:text-slate-300"
+        ></p>
       </div>
 
       <div class="space-y-0.5">
         <h3
-          class="text-[10px] font-medium uppercase tracking-wider text-slate-400"
+          class="text-[10px] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500"
         >
           Region
         </h3>
-        <p id="res-regionname" class="text-xs font-normal text-slate-800"></p>
+        <p
+          id="res-regionname"
+          class="text-xs font-normal text-slate-800 dark:text-slate-300"
+        ></p>
       </div>
 
       <div class="space-y-0.5">
         <h3
-          class="text-[10px] font-medium uppercase tracking-wider text-slate-400"
+          class="text-[10px] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500"
         >
           Circle Name
         </h3>
-        <p id="res-circlename" class="text-xs font-normal text-slate-800"></p>
+        <p
+          id="res-circlename"
+          class="text-xs font-normal text-slate-800 dark:text-slate-300"
+        ></p>
       </div>
 
       <div class="space-y-0.5">
         <h3
-          class="text-[10px] font-medium uppercase tracking-wider text-slate-400"
+          class="text-[10px] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500"
         >
           Division
         </h3>
-        <p id="res-divisionname" class="text-xs font-normal text-slate-800"></p>
+        <p
+          id="res-divisionname"
+          class="text-xs font-normal text-slate-800 dark:text-slate-300"
+        ></p>
       </div>
 
       <div class="space-y-0.5">
         <h3
-          class="text-[10px] font-medium uppercase tracking-wider text-slate-400"
+          class="text-[10px] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500"
         >
           Office Type
         </h3>
-        <p id="res-officetype" class="text-xs font-normal text-slate-800"></p>
+        <p
+          id="res-officetype"
+          class="text-xs font-normal text-slate-800 dark:text-slate-300"
+        ></p>
       </div>
 
       <div class="space-y-0.5">
         <h3
-          class="text-[10px] font-medium uppercase tracking-wider text-slate-400"
+          class="text-[10px] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500"
         >
           Delivery Status
         </h3>
-        <p id="res-delivery" class="text-xs font-normal text-slate-800"></p>
+        <p
+          id="res-delivery"
+          class="text-xs font-normal text-slate-800 dark:text-slate-300"
+        ></p>
       </div>
 
       <div class="space-y-0.5">
         <h3
-          class="text-[10px] font-medium uppercase tracking-wider text-slate-400"
+          class="text-[10px] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500"
         >
           Coordinates
         </h3>
-        <p class="text-xs font-mono font-normal text-slate-800">
-          <span id="res-latitude">-</span>,
-          <span id="res-longitude">-</span>
+        <p
+          class="text-xs font-mono font-normal text-slate-800 dark:text-slate-300"
+        >
+          <span id="res-latitude">-</span>, <span id="res-longitude">-</span>
         </p>
       </div>
     </div>

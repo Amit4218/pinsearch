@@ -1,28 +1,63 @@
 <header
-  class="w-full border-b border-slate-100 bg-white/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4"
+  class="w-full border-b border-slate-100 dark:border-slate-900 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4"
 >
   <div class="max-w-4xl mx-auto flex items-center justify-between">
     <a
       href="/"
-      class="text-xs font-bold tracking-widest uppercase text-slate-900"
-      aria-label="pinsearch.amit4218.fun Home"
+      class="text-xs font-bold tracking-widest uppercase text-slate-900 dark:text-white"
+      aria-label="Pincode.io Home"
     >
-      pinsearch<span class="text-slate-400"></span>
+      pinsearch
     </a>
 
     <nav class="flex items-center gap-6" aria-label="Developer Navigation">
       <a
         href="/api-docs"
-        class="text-xs font-medium uppercase tracking-wider text-slate-400 hover:text-slate-900 transition-colors duration-150"
+        class="text-xs font-medium uppercase tracking-wider text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-150"
       >
-        API
+        API Docs
       </a>
       <a
         href="/sdk-docs"
-        class="text-xs font-medium uppercase tracking-wider text-slate-400 hover:text-slate-900 transition-colors duration-150"
+        class="text-xs font-medium uppercase tracking-wider text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-150"
       >
         SDK
       </a>
+
+      <button
+        id="themeToggle"
+        class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-150 focus:outline-none"
+        aria-label="Toggle visual theme"
+      >
+        <svg
+          id="themeSun"
+          class="w-4 h-4 hidden dark:block"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"
+          />
+        </svg>
+        <svg
+          id="themeMoon"
+          class="w-4 h-4 dark:hidden"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+          />
+        </svg>
+      </button>
     </nav>
   </div>
 </header>
