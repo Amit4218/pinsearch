@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pinsearch_sdk import PinSearch, PincodeData 
 from schema.response_schemas import PincodeNotFound, PublicApiResponse
+from settings import ApplicationSettings
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.middleware import SlowAPIMiddleware
 from slowapi.util import get_remote_address
@@ -15,7 +16,7 @@ client = PinSearch()
 limiter = Limiter(key_func=get_remote_address)
 
 
-app = FastAPI()
+app = FastAPI(**ApplicationSettings().model_dump())
 
 app.add_middleware(SlowAPIMiddleware)
 app.add_middleware(
@@ -56,6 +57,12 @@ async def not_found_handler(request: Request, exc):
 async def root():
     return {"status": "ok","message": "Application running"}
 
+
+@app.get("/openapi.json", response_model=ApplicationSettings, response_model_exclude_none=True)
+async def openapi_metadata():
+    return ApplicationSettings().model_dump()
+
+
 @app.get("/")
 async def home(req: Request):
     return template.TemplateResponse(request=req, name="pages/home.html")
@@ -89,7 +96,7 @@ async def fetch_code_data(
 @limiter.limit("30/minute;1000/day")
 async def fetch_information(
     request:Request,
-    code: str | None = None,
+    code: Annotated[str | None, Query(pattern=r"^\d{6}$")] = None,
     state_name: str | None = None,
     district: str | None = None,
 ) -> PublicApiResponse:
