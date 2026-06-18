@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Theme Toggle Configuration
+  // 1. Theme Toggle Configuration (Runs on ALL pages)
   const themeToggle = document.getElementById("themeToggle");
 
   if (themeToggle) {
@@ -36,13 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "longitude",
   ];
 
-  // Exit quietly if the user is on /api-docs or /sdk-docs pages
-  if (!form) {
-    console.debug(
-      "searchForm not detected on this page path. Disengaging search engine.",
-    );
-    return;
-  }
+  // Exit quietly here if the user is on documentation pages so it doesn't break
+  if (!form) return;
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -65,11 +60,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await response.json();
 
+      // Update text details fields
       fields.forEach((field) => {
         const el = document.getElementById(`res-${field}`);
         if (el) el.textContent = data[field] ?? "-";
       });
 
+      // DYNAMIC MAP BUTTON CONFIGURATION (Now safely inside the success loop)
+      const mapBtn = document.getElementById("res-mapBtn");
+      if (mapBtn) {
+        const lat = data.latitude;
+        const lng = data.longitude;
+
+        if (lat && lng && lat !== "-" && lng !== "-") {
+          mapBtn.href = `https://www.google.com/maps?q=${lat},${lng}`;
+          mapBtn.classList.remove("hidden");
+          mapBtn.classList.add("inline-flex");
+        } else {
+          mapBtn.classList.add("hidden");
+          mapBtn.classList.remove("inline-flex");
+          mapBtn.href = "#";
+        }
+      }
+
+      // Transition layouts
       if (mainContainer)
         mainContainer.classList.remove("justify-center", "min-h-[60vh]");
       if (searchBlock)
