@@ -12,7 +12,7 @@ Build your own pinsearch application with the lightweight python `pinsearch-sdk`
 
 ## pinsearch public api
 
-Use the public api from pinsearch free of cost and now registration required. [Learn More](https://pinsearch.amit4218.fun/api-docs)
+Use the public api from pinsearch free of cost and no registration required. [Learn More](https://pinsearch.amit4218.fun/api-docs)
 
 ## Run locally
 
